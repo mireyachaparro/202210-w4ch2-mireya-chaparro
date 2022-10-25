@@ -36,3 +36,14 @@
     transform: rotate(360deg);
   }
 }
+label {
+  font-size: 1rem;
+  font-weight: 300;
+}
+
+select {
+  width: 10.7rem;
+}
+[type="date"] {
+  width: 10.4rem;
+}

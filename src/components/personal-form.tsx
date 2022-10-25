@@ -7,6 +7,10 @@ type User = {
   gender: string;
   email: string;
   isOk: boolean;
+  username: string;
+  password: string;
+  repeatpassword: string;
+  acounttype: string;
 };
 
 export function PersonalForm() {
@@ -17,32 +21,40 @@ export function PersonalForm() {
     gender: "",
     email: "",
     isOk: false,
+    username: "",
+    password: "",
+    repeatpassword: "",
+    acounttype: "",
   };
 
   const [form, setForm] = useState(user);
 
   const handleSubmit = (ev: SyntheticEvent) => {
     ev.preventDefault();
-    console.log("enviando");
-    console.log(form.gender);
+    // console.log("enviando");
+    // console.log(form.gender);
   };
+
+  // const handleForm = (ev: SyntheticEvent) => {
+  //   const element = ev.target as HTMLFormElement; //la variable recoge el elemento, que es el input en el q estamos haciendo clic, ese input tiene name.
+  //   // console.log("input", element.name); //aqui recoge el name de ese input (que ahora mismo es name, age o phone)
+  //   setForm({ ...form, [element.name]: element.value }); //quiero que el cambio q he hecho al escribir se guarde en el correspondiente valor del estado del input. a demas, cada vez que se va escribiendo, se va guardando
+  // };
+
+  // const handleCheck = (ev: SyntheticEvent) => {
+  //   const element = ev.target as HTMLFormElement;
+  //   //console.log("change", element.name);
+  //   setForm({ ...form, [element.name]: element.checked });
+  // };
 
   const handleForm = (ev: SyntheticEvent) => {
-    //{recibe el objeto evento}
-    const element = ev.target as HTMLFormElement; //la variable recoge el elemento, que es el input en el q estamos haciendo clic, ese input tiene name.
-    console.log("input", element.name); //aqui recoge el name de ese input (que ahora mismo es name, age o phone)
-    setForm({ ...form, [element.name]: element.value }); //quiero que el cambio q he hecho al escribir se guarde en el correspondiente valor del estado del input. a demas, cada vez que se va escribiendo, se va guardando
-  };
-
-  const handleCheck = (ev: SyntheticEvent) => {
     const element = ev.target as HTMLFormElement;
-    console.log("change", element.name);
-    setForm({ ...form, [element.name]: element.checked });
+    setForm({
+      ...form,
+      [element.name]:
+        element.type === "checkbox" ? element.checked : element.value,
+    });
   };
-
-  //principios de diseño: DRY (dont repeat yourself) / KISS (Keep it simple, Stupid)
-  //para no repetir lo deabajo, pone el ternario
-  //si es igual, guardamos el valor de element.checked, y sino el de element.value
 
   return (
     <form onSubmit={handleSubmit}>
@@ -68,6 +80,9 @@ export function PersonalForm() {
         />
       </div>
       <div>
+        <div>
+          <label>Fecha de nacimiento</label>
+        </div>
         <input
           type="date"
           name="birthdate"
@@ -75,6 +90,44 @@ export function PersonalForm() {
           value={form.birthdate}
           onInput={handleForm}
         />
+      </div>
+      <div>
+        <input
+          type="radio"
+          name="gender"
+          id=""
+          onChange={handleForm}
+          value={"Male"}
+          checked={form.gender === "Male"}
+        />
+        Male
+        <input
+          type="radio"
+          name="gender"
+          id=""
+          onChange={handleForm}
+          value={"Female"}
+          checked={form.gender === "Female"}
+        />
+        Female
+        <input
+          type="radio"
+          name="gender"
+          id=""
+          onChange={handleForm}
+          value={"Other"}
+          checked={form.gender === "Other"}
+        />
+        Other
+        <input
+          type="radio"
+          name="gender"
+          id=""
+          onChange={handleForm}
+          value={"Prefer not to mention"}
+          checked={form.gender === "Prefer not to mention"}
+        />
+        Prefer not to mention
       </div>
       <div>
         <input
@@ -92,13 +145,71 @@ export function PersonalForm() {
             type="checkbox"
             name="isOk"
             checked={form.isOk}
-            onChange={handleCheck}
+            onChange={handleForm}
           />
           ¿Desea recibir información de nuestra newsletter?
         </label>
       </div>
       <button type="submit">Aceptar</button>
+      <div>
+        <input
+          type="text"
+          name="username"
+          id=""
+          placeholder="Dime tu username"
+          value={form.username}
+          onInput={handleForm}
+        />
+      </div>
+      <div>
+        <input
+          type="password"
+          name="password"
+          id=""
+          placeholder="Dime tu password"
+          value={form.password}
+          onInput={handleForm}
+        />
+      </div>
+      <div>
+        <input
+          type="password"
+          name="repeatpassword"
+          id=""
+          placeholder="Repite tu password"
+          value={form.repeatpassword}
+          onInput={handleForm}
+        />
+      </div>
+      <div>
+        <div>
+          <label>Tipo de cuenta</label>
+        </div>
+        <select>
+          <option
+            value={"personal"}
+            onSelect={handleForm}
+            selected={form.acounttype === "Personal"}
+          >
+            Personal
+          </option>
+          <option
+            value={"pro"}
+            onSelect={handleForm}
+            selected={form.acounttype === "Pro"}
+          >
+            Pro
+          </option>
+          <option
+            value={"business"}
+            onSelect={handleForm}
+            selected={form.acounttype === "Business"}
+          >
+            Business
+          </option>
+        </select>
+      </div>
+      <button type="submit">Aceptar</button>
     </form>
-    /*select y radio utilizan el value*/
   );
 }
