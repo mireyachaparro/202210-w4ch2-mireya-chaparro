@@ -31,21 +31,7 @@ export function PersonalForm() {
 
   const handleSubmit = (ev: SyntheticEvent) => {
     ev.preventDefault();
-    // console.log("enviando");
-    // console.log(form.gender);
   };
-
-  // const handleForm = (ev: SyntheticEvent) => {
-  //   const element = ev.target as HTMLFormElement; //la variable recoge el elemento, que es el input en el q estamos haciendo clic, ese input tiene name.
-  //   // console.log("input", element.name); //aqui recoge el name de ese input (que ahora mismo es name, age o phone)
-  //   setForm({ ...form, [element.name]: element.value }); //quiero que el cambio q he hecho al escribir se guarde en el correspondiente valor del estado del input. a demas, cada vez que se va escribiendo, se va guardando
-  // };
-
-  // const handleCheck = (ev: SyntheticEvent) => {
-  //   const element = ev.target as HTMLFormElement;
-  //   //console.log("change", element.name);
-  //   setForm({ ...form, [element.name]: element.checked });
-  // };
 
   const handleForm = (ev: SyntheticEvent) => {
     const element = ev.target as HTMLFormElement;
@@ -150,7 +136,7 @@ export function PersonalForm() {
           ¿Desea recibir información de nuestra newsletter?
         </label>
       </div>
-      <button type="submit">Aceptar</button>
+      <button type="submit">Next</button>
       <div>
         <input
           type="text"
@@ -186,30 +172,33 @@ export function PersonalForm() {
           <label>Tipo de cuenta</label>
         </div>
         <select>
-          <option
-            value={"personal"}
-            onSelect={handleForm}
-            selected={form.acounttype === "Personal"}
-          >
+          <option value={"personal"} onChange={handleForm}>
             Personal
           </option>
-          <option
-            value={"pro"}
-            onSelect={handleForm}
-            selected={form.acounttype === "Pro"}
-          >
+          <option value={"Pro"} onChange={handleForm}>
             Pro
           </option>
-          <option
-            value={"business"}
-            onSelect={handleForm}
-            selected={form.acounttype === "Business"}
-          >
+          <option value={"business"} onChange={handleForm}>
             Business
           </option>
         </select>
       </div>
-      <button type="submit">Aceptar</button>
+      <button type="submit">Previous</button>
+      <button type="submit">Next</button>
+      <div>
+        <h2>Los datos introducidos son:</h2>
+        <ul>
+          <li>Nombre: {form.name}</li>
+          <li>Apellido: {form.lastname}</li>
+          <li>Fecha de nacimiento: {form.birthdate}</li>
+          <li>Genero: {form.gender}</li>
+          <li>Email: {form.email}</li>
+          <li>Username: {form.username}</li>
+          <li>Password no se muestra por motivos de seguridad</li>
+          <li>Tipo de cuenta: </li>
+        </ul>
+      </div>
+      <button type="submit">Acceder</button>
     </form>
   );
 }

@@ -47,3 +47,7 @@ select {
 [type="date"] {
   width: 10.4rem;
 }
+
+ul {
+  list-style: none;
+}
