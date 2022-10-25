@@ -1,10 +1,14 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import { PersonalForm } from "./components/personal-form";
+import { AccountForm } from "./components/access-form";
 
 function App() {
   return (
     <div className="App">
+      <PersonalForm></PersonalForm>
+      <AccountForm></AccountForm>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
